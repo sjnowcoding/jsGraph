@@ -1,0 +1,50 @@
+<body>
+    <button>화면지우기</button>
+    <button>좌표축그리기</button>
+    <button>그래프그리기</button>
+    <input type="text" value="0">X*X + <input type="text" value="0">X + <input type="text" value="0">
+
+</br>
+    <canvas id="tutorial" width="500" height="700" style="background-color: lightgray;"></canvas>
+
+    <script>
+
+        var canvas = document.getElementById('tutorial');
+        var ctx = canvas.getContext('2d');
+
+	//좌표축 그리기 함수
+        function drawAxis() {
+        ctx.beginPath();
+        ctx.moveTo(0, 250);  ctx.lineTo(500,250); ctx.stroke();
+      
+        ctx.beginPath();
+        ctx.moveTo(250, 0);  ctx.lineTo(250,500); ctx.stroke();
+        }
+        function Erase(){ ctx.clearRect(0,0,500, 700);}
+    
+        function abc() {
+
+             let   $itags = document.querySelectorAll('input');
+             let a = Number( $itags[0].value);
+             let b = Number( $itags[1].value);
+             let c = Number( $itags[2].value);
+
+            for(let mx = -200; mx < 200; mx+=1)
+            {
+            let my = a*mx*mx+b*mx + c;
+            ctx.beginPath();
+            // 호그리기( x, y, 반지름, 시작각도, 끝각도)
+             ctx.arc(mx+250, 250-my, 1, 0, 2*Math.PI);
+             if(mx ==0) { ctx.fillStyle = "red";}
+             else{ ctx.fillStyle = 'black'; }
+            ctx.fill();
+        }
+    }
+        // 버튼태그 모두 가져오기 
+        let $btn = document.querySelectorAll('button');
+        $btn[0].addEventListener('click',Erase);
+        $btn[1].addEventListener('click',drawAxis);
+        $btn[2].addEventListener('click',abc);
+    </script>
+  
+  </body>
